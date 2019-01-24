@@ -14,11 +14,14 @@ function toRoman(n) {
   const num = n.toString()
   let result = ''
 
-
+  //iterates the number, then call chainZero function to create an Array
+  //tens, hundreds and milliars.
   for (i of num) {
     places.push(chainZero(i,len))
     len--
   }
+
+  //just compare the places array with the strings.
   places.map((num,i) => {
     result += romans[decimals.indexOf(num)]
   })

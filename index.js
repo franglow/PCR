@@ -20,7 +20,9 @@ function toRoman(number) {
   let res = ""
   for (let [roman, numeral] of Object.entries(roman_numerals)) {
     matches = number / numeral;
+    //whether matches exist, it tells how many repetitions
     res += roman.repeat(parseInt(matches));
+    //get the next number of the argument
     number = number % numeral;
   }
   return `${original} to Roman: ${res}`

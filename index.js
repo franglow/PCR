@@ -1,29 +1,27 @@
-const chainZero = (val,len) => {
-  for(let i=1;i<len;i++) {
-    val = val+"0"
+function toRoman(number) {
+  if(!Number.isInteger(number)) {return false}
+  if(number > 3999) {return false}
+  roman_numerals = {
+        'M'  : 1000,
+        'CM' : 900,
+        'D'  : 500,
+        'CD' : 400,
+        'C'  : 100,
+        'XC' : 90,
+        'L'  : 50,
+        'XL' : 40,
+        'X'  : 10,
+        'IX' : 9,
+        'V'  : 5,
+        'IV' : 4,
+        'I'  : 1
   }
-  return val
-}
-
-function toRoman(n) {
-  if(n >= 4000) return "Only numbers between 1 and 3999"
-  const romans = ["","","","I","II","III","IV","V","VI","VII","VIII","IX","X","XX","XXX","XL","L","LX","LXX","LXXX","XC","C","CC","CCC","CD","D","DC","DCC","DCCC","CM","M","MM","MMM"]
-  const decimals = ["000","00","0","1","2","3","4","5","6","7","8","9","10","20","30","40","50","60","70","80","90","100","200","300","400","500","600","700","800","900","1000","2000","3000"]
-  let len = Math.ceil(Math.log10(n + 1))
-  const places = []
-  const num = n.toString()
-  let result = ''
-
-  //iterates the number, then call chainZero function to create an Array
-  //tens, hundreds and milliars.
-  for (i of num) {
-    places.push(chainZero(i,len))
-    len--
+  let matches = 0;
+  let res = ""
+  for (let [roman, numeral] of Object.entries(roman_numerals)) {
+    matches = number / numeral;
+    res += roman.repeat(parseInt(matches));
+    number = number % numeral;
   }
-
-  //just compare the places array with the strings.
-  places.map((num,i) => {
-    result += romans[decimals.indexOf(num)]
-  })
-  return result
+  return `${original} to Roman: ${res}`
 }
